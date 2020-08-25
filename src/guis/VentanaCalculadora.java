@@ -1,12 +1,11 @@
 package guis;
-// package que contiene la Calculadora para la dependencia
-import modelo.Calculadora;
+import modelo.Calculadora; // package que contiene la Calculadora para la dependencia
 // packages requeridos para uso de JFrame y los eventos
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VentanaCalculadora extends JFrame  {
+public class VentanaCalculadora extends JFrame implements ActionListener {
     // Atributos de la ventana, son elementos Java Swing
     private JTextField textField1;
     private JTextField textField2;
@@ -21,7 +20,7 @@ public class VentanaCalculadora extends JFrame  {
    public  VentanaCalculadora() {
        initVentanaCalculadora ();
        // Otras caracaterísticas de la ventana
-       // Configirar su tamaño inicial y que se detenga la app al salir
+       // Configurar su tamaño inicial y que se detenga la app al salir
        setSize (600 , 400);
        setDefaultCloseOperation (EXIT_ON_CLOSE);
    }
@@ -43,6 +42,10 @@ public class VentanaCalculadora extends JFrame  {
 
        JButton sumarButton = new JButton();
        sumarButton.setText("Sumar");
+       JButton salirButton = new JButton();
+       salirButton.setText("Salir");
+       JButton limpiarButton = new JButton();
+       limpiarButton.setText("Limpiar");
 
        // Se agregan los elementos al panel
        panel.add(labelNum1);
@@ -51,11 +54,13 @@ public class VentanaCalculadora extends JFrame  {
        panel.add(textField2);
        panel.add(labelResultado);
        panel.add(sumarButton);
+       panel.add(salirButton);
+       panel.add(limpiarButton);
 
        // El panel se agrega con todos su elementos a la ventana
        this.add(panel);
 
-      // Implementación de la Interface ActionListener para el boton sumarButton
+       // Implementación de la Interface ActionListener para el boton sumarButton
        sumarButton.addActionListener(new ActionListener () {
            @Override
            public void actionPerformed(ActionEvent e) {
@@ -68,6 +73,38 @@ public class VentanaCalculadora extends JFrame  {
                labelResultado.setText ("Resultado: " + result);
            }
        });
+
+       salirButton.addActionListener (new ActionListener () {
+           /**
+            * Invoked when an action occurs.
+            *
+            * @param e the event to be processed
+            */
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               int n = JOptionPane.showConfirmDialog( panel.getParent (),
+                       "¿Confirma que desea Salir?",
+                       "Salir del sistema",
+                       JOptionPane.YES_NO_OPTION);
+               if (n==JOptionPane.YES_OPTION) System.exit ( 0);
+           }
+       });
    }
+
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    // Otra foramde implementar un comportamiento apra le botón Limpiar
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource ()== limpiarButton) {
+            textField1.setText ("");
+            textField2.setText ("");
+        }
+    }
+
+
 }
 

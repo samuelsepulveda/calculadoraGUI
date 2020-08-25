@@ -90,6 +90,7 @@
           <gridbag weightx="1.0" weighty="1.0"/>
         </constraints>
         <properties>
+          <name value="salirButton"/>
           <text value="Salir"/>
         </properties>
       </component>
