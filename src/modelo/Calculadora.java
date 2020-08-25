@@ -37,13 +37,16 @@ public class Calculadora {
                 ", numero02=" + numero02 +
                 '}';
     }
-
-
+   // Se usa para mostrar encapsulamiento, al calculadora no permite acceso a la forma en que suma
    public int sumar() {
       return sumador();
    }
 
+   // El méotdo sumador es el que realmente suma, es privado y se accede a él vía el método public
+   //
    private int sumador() {
        return this.numero01 + this.numero02;
    }
+
+   // OJO: Falta implementar las demás operaciones aritméticas!!!
 }
